@@ -1,0 +1,10 @@
+{
+    "name": "apogeejs-module-sqlite",
+    "version": "0.0.1",
+    "description": "ApogeeJS node module for SQLite access",
+    "main": "./src/SqliteComponentModule.js",
+    "dependencies": {
+      "sqlite3": "^5.0.2"
+    },
+    "author": "Dave Sutter"
+  }
