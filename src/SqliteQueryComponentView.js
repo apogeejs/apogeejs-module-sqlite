@@ -27,21 +27,8 @@ class SqliteQueryCellView extends FormInputBaseComponentView {
         switch(viewType) {
 
             case SqliteQueryCellView.VIEW_DATA:
-                //figure out if we want a grid or plain json
-                let formResultMember = this.getComponent().getField("member.formResult");
-                let formResultData = formResultMember.getData();
-                let useMapsFormat = false;
-                if(formResultData) {
-                    useMapsFormat = (formResultData.outputFormat == "maps");
-                }
-
-                dataDisplaySource = this._getBodyDataSource(useMapsFormat);
-                if(useMapsFormat) {
-                    return new AceTextEditor(displayContainer,dataDisplaySource,"ace/mode/json",AceTextEditor.OPTION_SET_DISPLAY_SOME);
-                }
-                else {
-                    return new HandsonGridEditor(displayContainer,dataDisplaySource);
-                }
+                dataDisplaySource = dataDisplayHelper.getMemberDataTextDataSource(this.getApp(),this,"member.data",true)
+                return new AceTextEditor(displayContainer,dataDisplaySource,"ace/mode/json",AceTextEditor.OPTION_SET_DISPLAY_SOME);
 
             case SqliteQueryCellView.VIEW_INPUT:
                 return this.getFormDataDisplay(displayContainer);
@@ -165,91 +152,6 @@ class SqliteQueryCellView extends FormInputBaseComponentView {
             }
         ]
     }
-
-    //==========================
-    // Private Methods
-    //==========================
-
-    _getBodyDataSource(useMapsFormat) {
-        return {
-            doUpdate: () => {
-                //return value is whether or not the data display needs to be udpated
-                let reloadData = this.getComponent().isMemberDataUpdated("member.data");
-                //we only need to reload if the output format changes, but for now we will reload for any input change 
-                let reloadDataDisplay = this.getComponent().isMemberDataUpdated("member.formData");
-                return {reloadData,reloadDataDisplay};
-            },
-    
-            getData: () => {
-                //here we need to extract data from the member so we return
-                //the starndard wrapped data for the non-normal case and 
-                //extract the proper data for the normal case, returning
-                //unwrapped data in that case.
-                let allDataMember = this.getComponent().getField("member.data");
-				if(allDataMember.getState() != apogeeutil.STATE_NORMAL) {
-					return dataDisplayHelper.getStandardWrappedMemberData(allDataMember);
-				}
-				else {
-					let allData = allDataMember.getData();
-					if(allData != apogeeutil.INVALID_VALUE) {
-                        let bodyData = allData.body;
-                        if(useMapsFormat) {
-                            if(!bodyData) bodyData = [];
-                            //return text for text editor
-                            return JSON.stringify(bodyData,null,JSON_TEXT_FORMAT_STRING);
-                        }
-                        else {
-                            //return json for grid editor
-                            if(!bodyData) bodyData = [[]];
-                            return bodyData;
-                        }
-					}
-					else {
-						return apogeeutil.INVALID_VALUE
-					}
-				}
-            }
-        }
-    }
-
-    _getHeaderDataSource() {
-        return {
-            doUpdate: () => {
-                //return value is whether or not the data display needs to be udpated
-                let reloadData = this.getComponent().isMemberDataUpdated("member.data");
-                //we only need to reload if the output format changes, but for now we will reload for any input change 
-                let reloadDataDisplay = this.getComponent().isMemberDataUpdated("member.formData");
-                return {reloadData,reloadDataDisplay};
-            },
-    
-            getData: () => {
-                //here we need to extract data from the member so we return
-                //the starndard wrapped data for the non-normal case and 
-                //extract the proper data for the normal case, returning
-                //unwrapped data in that case.
-                let allDataMember = this.getComponent().getField("member.data");
-				if(allDataMember.getState() != apogeeutil.STATE_NORMAL) {
-					return dataDisplayHelper.getStandardWrappedMemberData(allDataMember);
-				}
-				else {
-					let allData = allDataMember.getData();
-					if(allData != apogeeutil.INVALID_VALUE) {
-                        let header = allData.header;
-                        if(header) {
-                            return [header]
-                        }
-                        else {
-                            return []
-                        }
-					}
-					else {
-						return apogeeutil.INVALID_VALUE
-					}
-				}
-            }
-        }
-    }
-
 }
 
 //======================================
