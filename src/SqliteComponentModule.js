@@ -7,7 +7,7 @@ const SqliteComponentModule = {
         SqliteMember.defineMember();
 
         //if the user interface is present, define the cell and the cell view (only in the app)
-        if((__globals__.apogeeapp)&&(__globals__apogeeview)) {
+        if((__globals__.apogeeapp)&&(__globals__.apogeeview)) {
             let SqliteQueryCell = require("./SqliteQueryComponent.js");
             let SqliteQueryCellView = require("./SqliteQueryComponentView.js");
 
