@@ -165,9 +165,9 @@ class SqliteQueryCellView extends FormInputBaseComponentView {
 SqliteQueryCellView.VIEW_DATA = "Result";
 
 SqliteQueryCellView.VIEW_MODES = [
-    FormInputBaseComponentView.VIEW_INFO_MODE_ENTRY,
+    FormInputBaseComponentView.VIEW_ERROR_MODE_ENTRY,
     {name: SqliteQueryCellView.VIEW_DATA, label: "Result", isActive: true},
-    FormInputBaseComponentView.INPUT_VIEW_MODE_INFO
+    FormInputBaseComponentView.
 ];
 
 SqliteQueryCellView.TABLE_EDIT_SETTINGS = {
