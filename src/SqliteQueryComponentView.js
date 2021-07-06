@@ -166,8 +166,15 @@ SqliteQueryCellView.VIEW_DATA = "Result";
 
 SqliteQueryCellView.VIEW_MODES = [
     FormInputBaseComponentView.VIEW_ERROR_MODE_ENTRY,
-    {name: SqliteQueryCellView.VIEW_DATA, label: "Result", isActive: true},
-    FormInputBaseComponentView.
+    {
+        name: SqliteQueryCellView.VIEW_DATA,
+        label: "Result",
+        sourceLayer: "model", 
+        sourceType: "data",
+        suffix: ".data",
+        isActive: true
+    },
+    FormInputBaseComponentView.INPUT_VIEW_MODE_CONFIG
 ];
 
 SqliteQueryCellView.TABLE_EDIT_SETTINGS = {
