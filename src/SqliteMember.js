@@ -22,7 +22,7 @@ function getDbConnection(options) {
     var fs = require('fs');
     
     //load file if it exists
-    if(fs.existsSync(options.dbPath)) {
+    if((fs.existsSync(options.dbPath))||(options.createIfMissing)) {
         let sqlite3 = require('sqlite3');
         if(options.verboseOption) {
             sqlite3 = require('sqlite3').verbose();
@@ -41,7 +41,7 @@ function getDbConnection(options) {
        
     }
     else { 
-        throw new Error("DB file not found: " + dbPath);
+        throw new Error("DB file not found: " + options.dbPath);
     }
 }
 
