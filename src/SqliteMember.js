@@ -51,14 +51,14 @@ function createQueryPromise(options) {
         //validate inputs
         let queryType = options.queryType;
         if((queryType != "run")&&(queryType != "all")&&(queryType != "get")) {
-            apogeeUserAlert("Invalid query type!");
+            console.error("Invalid query type: " + queryType);
             resolve(apogeeutil.INVALID_VALUE);
             return;
         }
         
         let sql = options.sql;
         if(!sql) {
-            apogeeUserAlert("SQL missing!");
+            //apogeeUserAlert("SQL missing!");
             resolve(apogeeutil.INVALID_VALUE);
             return;
         }
@@ -67,7 +67,7 @@ function createQueryPromise(options) {
         if(!params) params = [];
         
         if(!options.dbPath) {
-            apogeeUserAlert("Database path missing!");
+            //apogeeUserAlert("Database path missing!");
             resolve(apogeeutil.INVALID_VALUE);
             return;
         }
@@ -81,7 +81,7 @@ function createQueryPromise(options) {
                 db.run(sql, params, (err, rows) => {
                     try {
                         if(err) {
-                            reject(err.toString());
+                            reject(err);
                         }
                         else {
                             resolve("");
@@ -89,7 +89,7 @@ function createQueryPromise(options) {
                     }
                     catch(error) {
                         if(error.stack) console.error(error.stack);
-                        reject(error.toString());
+                        reject(error);
                     }
                 });
                 break;
@@ -98,7 +98,7 @@ function createQueryPromise(options) {
                 db.all(sql, params, (err, rows) => {
                     try {
                         if(err) {
-                            reject(err.toString());
+                            reject(err);
                         }
                         else {
                             let data = [];
@@ -114,7 +114,7 @@ function createQueryPromise(options) {
                     }
                     catch(error) {
                         if(error.stack) console.error(error.stack);
-                        reject(error.toString());
+                        reject(error);
                     }
                 });
                 break;
@@ -123,7 +123,7 @@ function createQueryPromise(options) {
                 db.get(sql, params, (err, row) => {
                     try {
                         if(err) {
-                            reject(err.toString());
+                            reject(err);
                         }
                         else {
                             let entry = {};
@@ -135,7 +135,7 @@ function createQueryPromise(options) {
                     }
                     catch(error) {
                         if(error.stack) console.error(error.stack);
-                        reject(error.toString());
+                        reject(error);
                     }
                 });
                 break;

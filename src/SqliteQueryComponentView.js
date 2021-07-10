@@ -72,6 +72,7 @@ class SqliteQueryCellView extends FormInputBaseComponentView {
                 type: "radioButtonGroup",
                 label: "Query Type: ",
                 entries: [["List Result","all"],["Single Result","get"],["No Result","run"]],
+                vaklue: "all",
                 key: "queryType"
             },
             {
@@ -147,6 +148,13 @@ class SqliteQueryCellView extends FormInputBaseComponentView {
                         label: "Create DB If Not Present: ",
                         value: "false",
                         key: "createIfMissing"
+                    },
+                    {
+                        type: "checkbox",
+                        label: "Show success/failure dialog box",
+                        value: false,
+                        key: "resultDialog"
+
                     }
                 ]
             }
