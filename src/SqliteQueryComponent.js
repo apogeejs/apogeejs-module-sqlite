@@ -1,14 +1,12 @@
 //These are in lieue of the import statements
-let {FormInputBaseComponent} = apogeeapp;
+let {Component,getFormComponentDefaultMemberJson} = apogeeapp;
 
 /** This is a simple custom component example. */
-class SqliteQueryCell extends FormInputBaseComponent {
-    constructor(member,modelManager,instanceToCopy,keepUpdatedFixed) {
-        super(member,modelManager,instanceToCopy,keepUpdatedFixed);
-    }
-}
+class SqliteQueryCell extends Component {};
 
-FormInputBaseComponent.initializeClass(SqliteQueryCell,"SQLite Query Cell","apogeeapp.SqliteQueryCell","apogee.SqliteQueryMember");
+SqliteQueryCell.displayName = "SQLite Query Cell";
+SqliteQueryCell.uniqueName = "apogeeapp.SqliteQueryCell";
+SqliteQueryCell.DEFAULT_MEMBER_JSON = getFormComponentDefaultMemberJson("apogee.SqliteQueryMember");
 
 module.exports = SqliteQueryCell;
 
