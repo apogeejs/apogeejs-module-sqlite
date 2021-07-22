@@ -1,47 +1,14 @@
 //These are in lieue of the import statements
-let {FormInputBaseComponentView,HandsonGridEditor,AceTextEditor,StandardErrorDisplay,dataDisplayHelper} = apogeeview;
+let {FormInputBaseComponentView,getMemberDataTextViewModeEntry,getErrorViewModeEntry} = apogeeview;
 
 /** This is a graphing component using ChartJS. It consists of a single data table that is set to
  * hold the generated chart data. The input is configured with a form, which gives multiple options
  * for how to set the data. */
 class SqliteQueryCellView extends FormInputBaseComponentView {
 
-    constructor(appViewInterface,component) {
-        super(appViewInterface,component);
-    };
-
     //=================================
     // Implementation Methods
     //=================================
-
-    /**  This method retrieves the table edit settings for this component instance
-     * @protected */
-    getTableEditSettings() {
-        return SqliteQueryCellView.TABLE_EDIT_SETTINGS;
-    }
-
-    /** This method should be implemented to retrieve a data display of the give type. 
-     * @protected. */
-    getDataDisplay(displayContainer,viewType) {
-        let dataDisplaySource;
-        switch(viewType) {
-
-            case SqliteQueryCellView.VIEW_DATA:
-                dataDisplaySource = dataDisplayHelper.getMemberDataTextDataSource(this.getApp(),this,"member.data",true)
-                return new AceTextEditor(displayContainer,dataDisplaySource,"ace/mode/json",AceTextEditor.OPTION_SET_DISPLAY_SOME);
-
-            case SqliteQueryCellView.VIEW_INPUT:
-                return this.getFormDataDisplay(displayContainer);
-
-            case FormInputBaseComponentView.VIEW_INFO: 
-                dataDisplaySource = dataDisplayHelper.getStandardErrorDataSource(this.getApp(),this);
-                return new StandardErrorDisplay(displayContainer,dataDisplaySource);
-
-            default:
-                console.error("unrecognized view element: " + viewType);
-                return null;
-        }
-    }
 
     /** This method returns the form layout.
      * @protected. */
@@ -162,37 +129,15 @@ class SqliteQueryCellView extends FormInputBaseComponentView {
     }
 }
 
-//======================================
-// Static properties
-//======================================
-
-//===================================
-// View Definitions Constants (referenced internally)
-//==================================
-
-SqliteQueryCellView.VIEW_DATA = "Result";
-
-SqliteQueryCellView.VIEW_MODES = [
-    FormInputBaseComponentView.VIEW_ERROR_MODE_ENTRY,
-    {
-        name: SqliteQueryCellView.VIEW_DATA,
-        label: "Result",
-        sourceLayer: "model", 
-        sourceType: "data",
-        suffix: ".data",
-        isActive: true
-    },
-    FormInputBaseComponentView.INPUT_VIEW_MODE_CONFIG
-];
-
-SqliteQueryCellView.TABLE_EDIT_SETTINGS = {
-    "viewModes": SqliteQueryCellView.VIEW_MODES
-}
-
-
 //===============================
 // Required External Settings
 //===============================
+
+SqliteQueryCellView.VIEW_MODES = [
+    getErrorViewModeEntry(),
+    getMemberDataTextViewModeEntry("member.data",{name:"Result",label:"Result",isActive:true,isReadOnly:true}),
+    FormInputBaseComponentView.getConfigViewModeEntry(),
+];
 
 /** This is the component name with which this view is associated. */
 SqliteQueryCellView.componentName = "apogeeapp.SqliteQueryCell";
