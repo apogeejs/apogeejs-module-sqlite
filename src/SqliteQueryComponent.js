@@ -6,8 +6,10 @@ class SqliteQueryCell extends Component {};
 
 SqliteQueryCell.CLASS_CONFIG = {
     displayName: "SQLite Query Cell",
-    uniqueName: "apogeeapp.SqliteQueryCell",
-    defaultMemberJson: getFormComponentDefaultMemberJson("apogee.SqliteQueryMember")
+    defaultMemberJson: getFormComponentDefaultMemberJson("apogee.SqliteQueryMember"),
+    defaultComponentJson: {
+        type: "apogeeapp.SqliteQueryCell"
+    }
 }
 
 module.exports = SqliteQueryCell;
