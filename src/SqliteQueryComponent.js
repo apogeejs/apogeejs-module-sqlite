@@ -1,10 +1,8 @@
 //These are in lieue of the import statements
 let {Component,getFormComponentDefaultMemberJson} = apogeeapp;
 
-/** This is a simple custom component example. */
-class SqliteQueryCell extends Component {};
-
-SqliteQueryCell.CLASS_CONFIG = {
+const SqliteQueryCellConfig = {
+    componentClass: Component,
     displayName: "SQLite Query Cell",
     defaultMemberJson: getFormComponentDefaultMemberJson("apogee.SqliteQueryMember"),
     defaultComponentJson: {
@@ -12,5 +10,5 @@ SqliteQueryCell.CLASS_CONFIG = {
     }
 }
 
-module.exports = SqliteQueryCell;
+module.exports = SqliteQueryCellConfig;
 
