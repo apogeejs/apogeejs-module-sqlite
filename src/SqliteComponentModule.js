@@ -9,7 +9,7 @@ const SqliteComponentModule = {
         //if the user interface is present, define the cell and the cell view (only in the app)
         if((__globals__.apogeeapp)&&(__globals__.apogeeview)) {
             let SqliteQueryCellConfig = require("./SqliteQueryComponent.js");
-            let SqliteQueryCellView = require("./SqliteQueryComponentView.js");
+            let SqliteQueryCellViewConfig = require("./SqliteQueryComponentView.js");
 
             //These are in lieue of the import statements
             let componentInfo = apogeeapp.componentInfo;
@@ -23,7 +23,7 @@ const SqliteComponentModule = {
             //-------------------------------
             //register the button component view
             //-------------------------------
-            registerComponentView(SqliteQueryCellView);
+            registerComponentView(SqliteQueryCellViewConfig);
         }
     }
 }

@@ -130,27 +130,22 @@ class SqliteQueryCellView extends FormInputBaseComponentView {
 }
 
 //===============================
-// Required External Settings
+// View Config
 //===============================
 
-SqliteQueryCellView.VIEW_MODES = [
-    getErrorViewModeEntry(),
-    getMemberDataTextViewModeEntry("member.data",{name:"Result",label:"Result",isActive:true,isReadOnly:true}),
-    FormInputBaseComponentView.getConfigViewModeEntry(),
-];
+const SqliteQueryCellViewConfig = {
+    componentType: "apogeeapp.SqliteQueryCell",
+    viewClass: SqliteQueryCellView,
+    viewModes: [
+        getErrorViewModeEntry(),
+        getMemberDataTextViewModeEntry("member.data",{name:"Result",label:"Result",isActive:true,isReadOnly:true}),
+        FormInputBaseComponentView.getConfigViewModeEntry(),
+    ],
+    hasTabEntry: false,
+    hasChildEntry: true,
+    iconResPath: "/icons3/genericCellIcon.png"
+}
 
-/** This is the component name with which this view is associated. */
-SqliteQueryCellView.componentName = "apogeeapp.SqliteQueryCell";
-
-/** If true, this indicates the component has a tab entry */
-SqliteQueryCellView.hasTabEntry = false;
-/** If true, this indicates the component has an entry appearing on the parent tab */
-SqliteQueryCellView.hasChildEntry = true;
-
-/** This is the icon url for the component. */
-SqliteQueryCellView.ICON_RES_PATH = "/icons3/genericCellIcon.png";
-
-
-module.exports = SqliteQueryCellView;
+module.exports = SqliteQueryCellViewConfig;
 
 
