@@ -141,8 +141,6 @@ const SqliteQueryCellViewConfig = {
         getMemberDataTextViewModeEntry("member.data",{name:"Result",label:"Result",isActive:true,isReadOnly:true}),
         FormInputBaseComponentView.getConfigViewModeEntry(),
     ],
-    hasTabEntry: false,
-    hasChildEntry: true,
     iconResPath: "/icons3/genericCellIcon.png"
 }
 
