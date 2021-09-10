@@ -1,7 +1,7 @@
 
 function defineMember() {
     let dataMemberTypeName = "apogee.SqliteQueryMember";
-    apogee.defineHardcodedJsonTable(dataMemberTypeName,DATA_MEMBER_FUNCTION_BODY);
+    apogee.defineHardcodedDataMember(dataMemberTypeName,DATA_MEMBER_FUNCTION_BODY);
 }
 
 module.exports = {defineMember};
